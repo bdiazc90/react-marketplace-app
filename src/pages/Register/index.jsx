@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Box, Paper, Typography, TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { post } from "../../services";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [values, setValues] = useState({
@@ -22,7 +23,22 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await post("user/signup", values);
-    console.log(data);
+    if (data.ok) {
+      Swal.fire({
+        icon: "success",
+        text: "Usuairo creado correctamente",
+      });
+      setValues({
+        name: "",
+        email: "",
+        password: "",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        text: data.message.detail,
+      });
+    }
   };
 
   return (
@@ -48,6 +64,7 @@ const Register = () => {
               onChange={handleInputChange}
               label="Full name"
               fullWidth
+              required
             />
           </Box>
           <Box my={3}>
@@ -58,6 +75,7 @@ const Register = () => {
               type="email"
               label="E-mail"
               fullWidth
+              required
             />
           </Box>
           <Box my={3}>
@@ -68,6 +86,7 @@ const Register = () => {
               type="password"
               label="Password"
               fullWidth
+              required
             />
           </Box>
           <Box my={3}>
