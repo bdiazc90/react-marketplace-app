@@ -19,10 +19,10 @@ const Login = () => {
             Login
           </Typography>
           <Box my={3}>
-            <TextField label="E-mail" fullWidth />
+            <TextField type="email" label="E-mail" fullWidth />
           </Box>
           <Box my={3}>
-            <TextField label="Password" fullWidth />
+            <TextField type="password" label="Password" fullWidth />
           </Box>
           <Box my={3}>
             <Button fullWidth variant="outlined">
