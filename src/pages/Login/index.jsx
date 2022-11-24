@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Box, TextField, Button, Paper, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { post } from "../../services";
 import Swal from "sweetalert2";
 
+import { AuthContext } from "../../context/AuthContext";
+
 const Login = () => {
+  const { authLogin, isAuth } = useContext(AuthContext);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+
+
+  if (isAuth()) {
+    return <Navigate to="/" />;
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,18 +33,15 @@ const Login = () => {
     const data = await post("user/login", values);
 
     if (data.ok) {
-      Swal.fire({
-        icon: "success",
-        text: "Usuario correcto",
-      });
-      setValues({
-        email: "",
-        password: "",
-      });
+      authLogin(data.data);
     } else {
       Swal.fire({
         icon: "error",
-        text: data.message,
+        text: "email/password incorrecto",
+      });
+      setValues({
+        ...values,
+        password: "",
       });
     }
   };
