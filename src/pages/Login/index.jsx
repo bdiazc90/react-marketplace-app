@@ -1,4 +1,5 @@
 import { Box, TextField, Button, Paper, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -26,6 +27,17 @@ const Login = () => {
           <Box my={3}>
             <Button fullWidth variant="outlined">
               Login
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              component={Link}
+              to="/sign-up"
+              sx={{
+                textTransform: "capitalize",
+              }}
+            >
+              Crear cuenta
             </Button>
           </Box>
         </Box>
