@@ -1,7 +1,29 @@
+import { useState } from "react";
 import { Box, Paper, Typography, TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { post } from "../../services";
 
 const Register = () => {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const data = await post("user/signup", values);
+    console.log(data);
+  };
+
   return (
     <Box
       display="flex"
@@ -19,13 +41,33 @@ const Register = () => {
             Sign Up
           </Typography>
           <Box my={3}>
-            <TextField label="Full name" fullWidth />
+            <TextField
+              name="name"
+              value={values.name}
+              onChange={handleInputChange}
+              label="Full name"
+              fullWidth
+            />
           </Box>
           <Box my={3}>
-            <TextField type="email" label="E-mail" fullWidth />
+            <TextField
+              name="email"
+              value={values.email}
+              onChange={handleInputChange}
+              type="email"
+              label="E-mail"
+              fullWidth
+            />
           </Box>
           <Box my={3}>
-            <TextField type="password" label="Password" fullWidth />
+            <TextField
+              name="password"
+              value={values.password}
+              onChange={handleInputChange}
+              type="password"
+              label="Password"
+              fullWidth
+            />
           </Box>
           <Box my={3}>
             <Button fullWidth variant="outlined">
