@@ -19,7 +19,8 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const data = await post("user/signup", values);
     console.log(data);
   };
@@ -36,7 +37,7 @@ const Register = () => {
           width: 300,
         }}
       >
-        <Box p={3}>
+        <Box p={3} component="form" onSubmit={handleSubmit} method="post">
           <Typography textAlign="center" variant="h4">
             Sign Up
           </Typography>
@@ -70,7 +71,7 @@ const Register = () => {
             />
           </Box>
           <Box my={3}>
-            <Button fullWidth variant="outlined">
+            <Button type="submit" fullWidth variant="outlined">
               Register
             </Button>
           </Box>

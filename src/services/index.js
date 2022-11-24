@@ -1,4 +1,4 @@
-const BASE_URL = "http-nodejs-production-78a7.up.railway.app/api/v1";
+const BASE_URL = "https://http-nodejs-production-78a7.up.railway.app/api/v1";
 
 export const get = async (url) => {
   try {
