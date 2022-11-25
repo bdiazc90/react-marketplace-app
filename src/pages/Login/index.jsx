@@ -29,14 +29,6 @@ const Login = () => {
 
     if (data.ok) {
       authLogin(data.data); // Le envio al usuario authenticado al AuthContext.
-      Swal.fire({
-        icon: "success",
-        text: "Usuario correcto",
-      });
-      setValues({
-        email: "",
-        password: "",
-      });
     } else {
       Swal.fire({
         icon: "error",
