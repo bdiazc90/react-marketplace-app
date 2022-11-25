@@ -25,7 +25,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await post("user/login", values);
+    const data = await post("users/login", values);
 
     if (data.ok) {
       authLogin(data.data); // Le envio al usuario authenticado al AuthContext.

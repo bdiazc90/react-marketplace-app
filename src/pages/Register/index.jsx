@@ -22,7 +22,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await post("user/signup", values);
+    const data = await post("users/signup", values);
     if (data.ok) {
       Swal.fire({
         icon: "success",
