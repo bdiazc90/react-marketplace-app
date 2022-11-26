@@ -35,7 +35,7 @@ function Home() {
             <Divider sx={{margin: 3}} />
             <GridActions sx={{margin: 3}} user={user} addRefresh={addRefresh} />
             <Divider sx={{margin: 3, borderColor: "black", borderStyle: "dashed"}} />
-            <GridProducts list={products} user={user} />
+            <GridProducts list={products} user={user} addRefresh={addRefresh} />
         </>
     );
 }

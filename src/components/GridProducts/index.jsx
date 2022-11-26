@@ -4,12 +4,13 @@ import { Grid, Card, CardMedia, CardContent, Typography, Button } from "@mui/mat
 import { post } from "../../services";
 
 function GridProducts(props) {
-    const { list, user } = props;
+    const { list, user, addRefresh } = props;
 
 	const { cart, addCart, removeCart } = useContext(CartContext);
 
 	async function deleteProduct(product) {
 		const response = await post("products/remove", {product_id: product.id});
+		addRefresh();
 	}
 
     return (
