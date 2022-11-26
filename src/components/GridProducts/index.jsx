@@ -1,11 +1,16 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Grid, Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import { post } from "../../services";
 
 function GridProducts(props) {
     const { list, user } = props;
 
 	const { cart, addCart, removeCart } = useContext(CartContext);
+
+	async function deleteProduct(product) {
+		const response = await post("products/remove", {product_id: product.id});
+	}
 
     return (
         <>
@@ -30,7 +35,7 @@ function GridProducts(props) {
 									<Typography variant="body2" color="text.secondary">
 										{product.user_name}
 									</Typography>
-									{(product.user_id !== user.id) &&
+									{(product.user_id !== user.id) ?
 										(cart.find((item) => item.id === product.id) === undefined ?
 											(<Button
 												fullWidth
@@ -49,7 +54,16 @@ function GridProducts(props) {
 													Remove from cart
 												</Button>)
 										)
-									}									
+									: (
+										<Button
+												fullWidth
+												onClick={() => deleteProduct(product)}
+												color="error"
+												variant="contained"
+												>
+													Delete Product
+												</Button>
+									)}									
 								</CardContent>
 								</Card>
 						</Grid>
