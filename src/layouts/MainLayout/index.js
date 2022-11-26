@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { CartContext } from "../../context/CartContext";
 import { Navigate, Outlet, Link } from "react-router-dom";
 import {
 	AppBar,
@@ -18,7 +19,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Person4RoundedIcon from "@mui/icons-material/Person4Rounded";
-import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import GridViewIcon from "@mui/icons-material/GridView";
 import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 
@@ -26,6 +27,7 @@ const drawerWidth = 240;
 
 const MainLayout = () => {
 	const { isAuth, user, logout } = useContext(AuthContext);
+	const { cart } = useContext(CartContext);
 
 	const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -92,19 +94,15 @@ const MainLayout = () => {
 						>
 							<Person4RoundedIcon />
 						</Button>
-						<Button
-							component={Link}
-							to="/books"
-							sx={{ color: "#fff" }}
-						>
-							<MenuBookRoundedIcon />
+						<Button component={Link} to="/" sx={{ color: "#fff" }}>
+							<GridViewIcon />
 						</Button>
 						<Button
 							sx={{ color: "#fff" }}
 							component={Link}
-							to="/basket"
+							to="/cart"
 						>
-							<Badge badgeContent={0} color="error">
+							<Badge badgeContent={cart.length} color="error">
 								<ShoppingCartRoundedIcon />
 							</Badge>
 						</Button>
